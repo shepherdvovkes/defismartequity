@@ -2,17 +2,17 @@
   "metadata": {
     "title": "DEFIMON Comprehensive Security Audit Report",
     "version": "1.0",
-    "date": "2025-09-04T05:05:52.304Z",
+    "date": "2025-09-04T05:21:48.903Z",
     "auditor": "AI Security Assistant",
     "methodology": "OWASP Top 10, Smart Contract Security Best Practices"
   },
   "executiveSummary": {
     "project": "DEFIMON Smart Contract & Frontend Application",
-    "assessmentDate": "2025-09-04T05:05:48.161Z",
-    "overallRiskScore": "8.8",
+    "assessmentDate": "2025-09-04T05:21:44.120Z",
+    "overallRiskScore": "8.7",
     "overallRiskLevel": "CRITICAL",
-    "totalVulnerabilities": 3,
-    "criticalVulnerabilities": 2,
+    "totalVulnerabilities": 2,
+    "criticalVulnerabilities": 1,
     "highVulnerabilities": 1,
     "mediumVulnerabilities": 0,
     "lowVulnerabilities": 0,
@@ -33,18 +33,10 @@
           "cvss": 9.8
         }
       ],
-      "timestamp": "2025-09-04T05:05:48.743Z"
+      "timestamp": "2025-09-04T05:21:44.758Z"
     },
     "frontend": {
       "vulnerabilities": [
-        {
-          "severity": "CRITICAL",
-          "title": "Authentication Bypass Vulnerability",
-          "description": "Protected route /dashboard accessible without authentication",
-          "impact": "Unauthorized access to sensitive functionality",
-          "cve": "CVE-2024-DEFIMON-104",
-          "cvss": 9
-        },
         {
           "severity": "HIGH",
           "title": "Sensitive Data Exposure",
@@ -54,11 +46,11 @@
           "cvss": 7.5
         }
       ],
-      "timestamp": "2025-09-04T05:05:51.097Z"
+      "timestamp": "2025-09-04T05:21:48.210Z"
     },
     "dependencies": {
       "error": "Command failed: npm audit --json",
-      "timestamp": "2025-09-04T05:05:52.296Z"
+      "timestamp": "2025-09-04T05:21:48.899Z"
     },
     "network": {
       "ports": [],
@@ -75,12 +67,12 @@
         "etag": "\"ok041rr3et2gd\"",
         "content-type": "text/html; charset=utf-8",
         "vary": "Accept-Encoding",
-        "date": "Thu, 04 Sep 2025 05:05:52 GMT",
+        "date": "Thu, 04 Sep 2025 05:21:48 GMT",
         "connection": "keep-alive",
         "keep-alive": "timeout=5",
         "transfer-encoding": "chunked"
       },
-      "timestamp": "2025-09-04T05:05:52.296Z",
+      "timestamp": "2025-09-04T05:21:48.899Z",
       "status": 200
     }
   },
