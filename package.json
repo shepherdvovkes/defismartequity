@@ -20,6 +20,8 @@
     "oracle:monitor": "node scripts/price-monitor.js",
     "oracle:manager": "node scripts/oracle-manager.js",
     "test:oracle": "hardhat test test/OracleTest.js",
+    "test:security": "hardhat test test/SecurityTest_Enhanced.js",
+    "test:all": "hardhat test",
     "verify:sepolia": "hardhat run scripts/verify.js --network sepolia",
     "verify": "hardhat verify",
     "dev": "next dev",
@@ -31,7 +33,10 @@
     "pm2:restart": "pm2 restart defimon",
     "pm2:delete": "pm2 delete defimon",
     "pm2:logs": "pm2 logs defimon",
-    "pm2:status": "pm2 status"
+    "pm2:status": "pm2 status",
+    "pentest:smart-contract": "node scripts/penetration-testing/smart-contract-pentest.js",
+    "pentest:frontend": "node scripts/penetration-testing/frontend-pentest.js",
+    "pentest:comprehensive": "node scripts/penetration-testing/run-pentest.js"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.9.6",

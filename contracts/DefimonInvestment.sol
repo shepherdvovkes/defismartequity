@@ -52,6 +52,19 @@ contract DefimonInvestment is Ownable, ReentrancyGuard, Pausable {
     address public signer2;
     address public signer3;
     
+    // SECURITY: Emergency controls
+    bool public emergencyMode;
+    uint256 public emergencyPauseTime;
+    address public emergencyController;
+    
+    // SECURITY: Rate limiting
+    mapping(address => uint256) public lastInvestmentTime;
+    uint256 public constant MIN_INVESTMENT_INTERVAL = 1 minutes;
+    
+    // SECURITY: Investment limits
+    uint256 public constant MAX_TOTAL_INVESTMENT = 1000 ether;
+    uint256 public totalInvested;
+    
     // Структура для запроса на вывод средств
     struct WithdrawalRequest {
         address to;
@@ -95,6 +108,46 @@ contract DefimonInvestment is Ownable, ReentrancyGuard, Pausable {
         signer1 = _signer1;
         signer2 = _signer2;
         signer3 = _signer3;
+        
+        // SECURITY: Set emergency controller to contract owner
+        emergencyController = msg.sender;
+        emergencyMode = false;
+        emergencyPauseTime = 0;
+        totalInvested = 0;
+    }
+    
+    /**
+     * @dev SECURITY: Emergency pause function (only emergency controller)
+     */
+    function emergencyPause() external {
+        require(msg.sender == emergencyController, "Only emergency controller can pause");
+        require(!emergencyMode, "Already in emergency mode");
+        
+        emergencyMode = true;
+        emergencyPauseTime = block.timestamp;
+        _pause();
+    }
+    
+    /**
+     * @dev SECURITY: Emergency resume function (only emergency controller)
+     */
+    function emergencyResume() external {
+        require(msg.sender == emergencyController, "Only emergency controller can resume");
+        require(emergencyMode, "Not in emergency mode");
+        
+        emergencyMode = false;
+        emergencyPauseTime = 0;
+        _unpause();
+    }
+    
+    /**
+     * @dev SECURITY: Update emergency controller (only current controller)
+     */
+    function updateEmergencyController(address newController) external {
+        require(msg.sender == emergencyController, "Only emergency controller can update");
+        require(newController != address(0), "Invalid controller address");
+        
+        emergencyController = newController;
     }
     
     /**
@@ -131,36 +184,63 @@ contract DefimonInvestment is Ownable, ReentrancyGuard, Pausable {
     
     /**
      * @dev Функция для инвестирования (получение токенов за ETH)
+     * SECURITY: Fixed reentrancy vulnerability using Checks-Effects-Interactions pattern
      */
     function invest() public payable nonReentrant whenNotPaused {
         require(msg.value > 0, "Investment amount must be greater than 0");
+        require(!emergencyMode, "Contract is in emergency mode");
         
-        // Получаем текущий коэффициент
+        // CHECKS: Validate all conditions before any state changes
         (uint256 coefficient, uint8 period) = getCurrentCoefficient();
-        
-        // Вычисляем количество токенов с учетом коэффициента
         uint256 tokenAmount = msg.value * BASE_EXCHANGE_RATE * coefficient;
         
-        // Проверяем, что у контракта достаточно токенов
+        // Verify sufficient tokens in contract
         require(
             defimonToken.balanceOf(address(this)) >= tokenAmount,
             "Insufficient tokens in contract"
         );
         
-        // Обновляем информацию об инвесторе
+        // Verify minimum investment amount (anti-spam protection)
+        require(msg.value >= 0.001 ether, "Minimum investment is 0.001 ETH");
+        
+        // Verify maximum investment amount (anti-whale protection)
+        require(msg.value <= 100 ether, "Maximum investment is 100 ETH");
+        
+        // SECURITY: Rate limiting - prevent rapid successive investments
+        require(
+            block.timestamp >= lastInvestmentTime[msg.sender] + MIN_INVESTMENT_INTERVAL,
+            "Investment rate limit exceeded"
+        );
+        
+        // SECURITY: Total investment limit
+        require(
+            totalInvested + msg.value <= MAX_TOTAL_INVESTMENT,
+            "Total investment limit exceeded"
+        );
+        
+        // EFFECTS: Update state variables BEFORE external calls
         if (!investors[msg.sender].exists) {
             investors[msg.sender].exists = true;
             investors[msg.sender].investmentCount = 0;
+            investors[msg.sender].totalInvested = 0;
+            investors[msg.sender].totalTokens = 0;
             investorAddresses.push(msg.sender);
         }
         
+        // Update investor state
         investors[msg.sender].totalInvested += msg.value;
         investors[msg.sender].totalTokens += tokenAmount;
         investors[msg.sender].investmentCount += 1;
         investors[msg.sender].lastInvestmentTime = block.timestamp;
         
-        // Переводим токены инвестору
-        defimonToken.transfer(msg.sender, tokenAmount);
+        // Update global state
+        totalInvested += msg.value;
+        lastInvestmentTime[msg.sender] = block.timestamp;
+        
+        // INTERACTIONS: External calls AFTER state updates (prevents reentrancy)
+        // Transfer tokens to investor
+        bool transferSuccess = defimonToken.transfer(msg.sender, tokenAmount);
+        require(transferSuccess, "Token transfer failed");
         
         emit InvestmentMade(msg.sender, msg.value, tokenAmount, coefficient, period);
     }

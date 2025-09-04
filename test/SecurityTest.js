@@ -195,7 +195,7 @@ describe("Security Tests for DEFIMON Contracts", function () {
         const investor = ethers.Wallet.createRandom().connect(ethers.provider);
         await owner.sendTransaction({
           to: investor.address,
-          value: ethers.utils.parseEther("1")
+          value: ethers.utils.parseEther("10")
         });
         
         // Используем минимальную сумму инвестиции (1 ETH)
