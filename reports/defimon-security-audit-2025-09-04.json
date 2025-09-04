@@ -2,13 +2,13 @@
   "metadata": {
     "title": "DEFIMON Comprehensive Security Audit Report",
     "version": "1.0",
-    "date": "2025-09-04T04:23:46.718Z",
+    "date": "2025-09-04T04:31:00.930Z",
     "auditor": "AI Security Assistant",
     "methodology": "OWASP Top 10, Smart Contract Security Best Practices"
   },
   "executiveSummary": {
     "project": "DEFIMON Smart Contract & Frontend Application",
-    "assessmentDate": "2025-09-04T04:23:44.440Z",
+    "assessmentDate": "2025-09-04T04:30:55.718Z",
     "overallRiskScore": "5.3",
     "overallRiskLevel": "MEDIUM",
     "totalVulnerabilities": 9,
@@ -32,7 +32,7 @@
           "cvss": 9.8
         }
       ],
-      "timestamp": "2025-09-04T04:23:45.001Z"
+      "timestamp": "2025-09-04T04:30:56.425Z"
     },
     "frontend": {
       "vulnerabilities": [
@@ -101,11 +101,11 @@
           "cvss": 5
         }
       ],
-      "timestamp": "2025-09-04T04:23:45.944Z"
+      "timestamp": "2025-09-04T04:31:00.091Z"
     },
     "dependencies": {
       "error": "Command failed: npm audit --json",
-      "timestamp": "2025-09-04T04:23:46.715Z"
+      "timestamp": "2025-09-04T04:31:00.925Z"
     },
     "network": {
       "ports": [],
@@ -115,12 +115,12 @@
         "etag": "\"5tf0husqxz9ea\"",
         "content-type": "text/html; charset=utf-8",
         "vary": "Accept-Encoding",
-        "date": "Thu, 04 Sep 2025 04:23:46 GMT",
+        "date": "Thu, 04 Sep 2025 04:31:00 GMT",
         "connection": "keep-alive",
         "keep-alive": "timeout=5",
         "transfer-encoding": "chunked"
       },
-      "timestamp": "2025-09-04T04:23:46.715Z",
+      "timestamp": "2025-09-04T04:31:00.926Z",
       "status": 200
     }
   },
