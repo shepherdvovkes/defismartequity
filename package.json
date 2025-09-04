@@ -36,7 +36,10 @@
     "pm2:status": "pm2 status",
     "pentest:smart-contract": "node scripts/penetration-testing/smart-contract-pentest.js",
     "pentest:frontend": "node scripts/penetration-testing/frontend-pentest.js",
-    "pentest:comprehensive": "node scripts/penetration-testing/run-pentest.js"
+    "pentest:comprehensive": "node scripts/penetration-testing/run-pentest.js",
+    "pentest:enhanced": "node scripts/penetration-testing/smart-contract-pentest-enhanced.js",
+    "security:verify": "npm run compile && npm run pentest:enhanced",
+    "security:deploy": "npm run compile && npm run deploy:v2:sepolia"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.9.6",

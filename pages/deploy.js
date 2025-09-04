@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import { useWallet } from '../utils/walletContext';
-import WalletStatus from '../components/WalletStatus';
+import { useWallet } from '../src/contexts/WalletContext';
+import WalletStatus from '../src/components/WalletStatus';
 import Link from 'next/link';
 
 export default function Deploy() {
