@@ -49,7 +49,7 @@ class SuspiciousActivityMonitor {
     }
 
     async monitorTransfers() {
-        console.log("📊 Мониторинг переводов токенов...");
+        console.log("Мониторинг переводов токенов...");
         
         // Получаем последние события Transfer
         const filter = this.token.filters.Transfer();
@@ -371,7 +371,7 @@ class SuspiciousActivityMonitor {
             id: ethers.utils.id(JSON.stringify(alert))
         };
         
-        console.log(`🚨 ALERT [${alert.severity}]: ${alert.type}`);
+                    console.log(`ALERT [${alert.severity}]: ${alert.type}`);
         console.log(`   Description: ${alert.description}`);
         console.log(`   Recommendation: ${alert.recommendation}`);
         console.log(`   Transaction: ${alert.activity.transactionHash}`);
@@ -415,7 +415,7 @@ class SuspiciousActivityMonitor {
     }
 
     async generateReport() {
-        console.log("\n📊 ОТЧЕТ О ПОДОЗРИТЕЛЬНОЙ АКТИВНОСТИ");
+        console.log("\nОТЧЕТ О ПОДОЗРИТЕЛЬНОЙ АКТИВНОСТИ");
         console.log("=".repeat(50));
         
         const now = Math.floor(Date.now() / 1000);
@@ -442,7 +442,7 @@ class SuspiciousActivityMonitor {
             .sort(([,a], [,b]) => b - a)
             .slice(0, 5);
         
-        console.log("\n🏆 Топ-5 адресов по активности:");
+        console.log("\nТоп-5 адресов по активности:");
         topAddresses.forEach(([address, count]) => {
             console.log(`  ${address}: ${count} транзакций`);
         });

@@ -1,35 +1,49 @@
 import Database from '../../utils/database';
+import { withAuth, withRateLimit } from '../../src/middleware/auth';
+import { withFullSecurity } from '../../src/middleware/security';
 
 let db = null;
 
-export default async function handler(req, res) {
-  // Initialize database connection
-  if (!db) {
-    db = new Database();
-    await db.init();
-  }
+// Apply comprehensive security, rate limiting and authentication middleware
+const handler = withFullSecurity(
+  withRateLimit({ maxRequests: 40, windowMs: 15 * 60 * 1000 })(
+    withAuth(async (req, res) => {
+      // Initialize database connection
+      if (!db) {
+        db = new Database();
+        await db.init();
+      }
 
-  try {
-    switch (req.method) {
-      case 'GET':
-        await handleGet(req, res);
-        break;
-      case 'POST':
-        await handlePost(req, res);
-        break;
-      case 'PUT':
-        await handlePut(req, res);
-        break;
-      default:
-        res.setHeader('Allow', ['GET', 'POST', 'PUT']);
-        res.status(405).end(`Method ${req.method} Not Allowed`);
-    }
-  } catch (error) {
-    console.error('API Error:', error);
-    await db.log('error', 'Transactions API Error', { error: error.message, stack: error.stack });
-    res.status(500).json({ error: 'Internal Server Error', details: error.message });
+      try {
+        switch (req.method) {
+          case 'GET':
+            await handleGet(req, res);
+            break;
+          case 'POST':
+            await handlePost(req, res);
+            break;
+          case 'PUT':
+            await handlePut(req, res);
+            break;
+          default:
+            res.setHeader('Allow', ['GET', 'POST', 'PUT']);
+            res.status(405).end(`Method ${req.method} Not Allowed`);
+        }
+      } catch (error) {
+        console.error('API Error:', error);
+        await db.log('error', 'Transactions API Error', { error: error.message, stack: error.stack });
+        res.status(500).json({ error: 'Internal Server Error', details: error.message });
+      }
+    })
+  ),
+  {
+    maxRequestSize: '2mb',
+    enableCORS: true,
+    enableInputValidation: true
   }
-}
+);
+
+export default handler;
 
 async function handleGet(req, res) {
   const { address, contractAddress, status, limit = 100 } = req.query;

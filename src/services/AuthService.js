@@ -1,5 +1,5 @@
 /**
- * 🔒 Authentication Service
+ * Authentication Service
  * Provides secure authentication for frontend components
  * Prevents authentication bypass vulnerabilities
  */

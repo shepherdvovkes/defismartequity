@@ -22,7 +22,7 @@ class PriceOracle {
       this.contract = new ethers.Contract(this.contractAddress, this.contractABI, wallet);
       
       console.log("✅ Price Oracle инициализирован");
-      console.log(`📊 Контракт: ${this.contractAddress}`);
+              console.log(`Контракт: ${this.contractAddress}`);
       console.log(`⏰ Интервал обновления: ${this.updateInterval / 1000} секунд`);
       
       return true;
@@ -63,7 +63,7 @@ class PriceOracle {
       if (this.lastPrice) {
         const priceChange = Math.abs(newPrice - this.lastPrice) / this.lastPrice;
         if (priceChange < 0.01) {
-          console.log("📊 Цена изменилась менее чем на 1%, пропускаем обновление");
+          console.log("Цена изменилась менее чем на 1%, пропускаем обновление");
           return false;
         }
       }

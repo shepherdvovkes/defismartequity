@@ -56,7 +56,7 @@ async function main() {
     console.log("✅ Переведено", ethers.utils.formatEther(transferAmount), "токенов");
     
     // 4. Проверяем балансы
-    console.log("\n📊 Проверяем балансы:");
+            console.log("\nПроверяем балансы:");
     const deployerBalance = await defimonTokenV2.balanceOf(deployer.address);
     const contractBalance = await defimonTokenV2.balanceOf(defimonInvestmentV2.address);
     
@@ -82,7 +82,7 @@ async function main() {
     console.log("\n📄 Адреса контрактов сохранены в deployed-contracts-v2.json");
     
     // 6. Выводим итоговую информацию
-    console.log("\n🎉 Деплой V2 контрактов завершен!");
+            console.log("\nДеплой V2 контрактов завершен!");
     console.log("=".repeat(50));
     console.log("DefimonTokenV2:", defimonTokenV2.address);
     console.log("DefimonInvestmentV2:", defimonInvestmentV2.address);

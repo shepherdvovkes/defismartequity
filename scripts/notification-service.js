@@ -113,18 +113,18 @@ class NotificationService {
             const response = await axios.post(this.config.channels.slack.webhookUrl, {
                 text: message,
                 username: 'DEFIMON Security Bot',
-                icon_emoji: ':shield:'
+                icon_emoji: ':lock:'
             });
             
-            console.log(`💬 Slack сообщение отправлено`);
+            console.log(`Slack сообщение отправлено`);
         } catch (error) {
-            console.error(`❌ Ошибка отправки Slack:`, error);
+            console.error(`Ошибка отправки Slack:`, error);
         }
     }
 
     async sendSMS(phone, message) {
         // Здесь можно интегрировать с SMS провайдером
-        console.log(`📞 SMS отправлен на ${phone}: ${message.substring(0, 100)}...`);
+        console.log(`SMS отправлен на ${phone}: ${message.substring(0, 100)}...`);
     }
 
     formatMessage(template, alert) {
@@ -161,7 +161,7 @@ class NotificationService {
     }
 
     async sendTestNotification() {
-        console.log('🧪 Отправка тестового уведомления...');
+        console.log('Отправка тестового уведомления...');
         
         const testAlert = {
             type: 'TEST_ALERT',
@@ -176,7 +176,7 @@ class NotificationService {
     }
 
     async sendCriticalAlert(description, contract, transactionHash) {
-        console.log('🚨 Отправка критического алерта...');
+        console.log('Отправка критического алерта...');
         
         const criticalAlert = {
             type: 'CRITICAL_SECURITY_ALERT',

@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 async function main() {
-    console.log("🚨 ЭКСТРЕННАЯ ПРИОСТАНОВКА ТОКЕНА DEFIMON V2");
+    console.log("ЭКСТРЕННАЯ ПРИОСТАНОВКА ТОКЕНА DEFIMON V2");
     console.log("=".repeat(50));
     
     // Загружаем адреса контрактов

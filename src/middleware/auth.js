@@ -1,5 +1,5 @@
 /**
- * 🔒 Authentication Middleware
+ * Authentication Middleware
  * Provides server-side authentication validation for API endpoints
  * Prevents authentication bypass vulnerabilities
  */

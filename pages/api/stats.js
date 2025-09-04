@@ -1,8 +1,9 @@
 import Database from '../../utils/database';
+import { withAuth, withRateLimit } from '../../src/middleware/auth';
 
 let db = null;
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   // Initialize database connection
   if (!db) {
     db = new Database();
@@ -167,3 +168,7 @@ async function handlePut(req, res) {
     res.status(500).json({ error: 'Failed to update statistics', details: error.message });
   }
 }
+
+export default withRateLimit({ maxRequests: 50, windowMs: 15 * 60 * 1000 })(
+  withAuth(handler)
+);

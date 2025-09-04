@@ -34,7 +34,7 @@ class PriceMonitor {
       this.contract = new ethers.Contract(this.contractAddress, contractABI, wallet);
       
       console.log("✅ Price Monitor инициализирован");
-      console.log(`📊 Контракт: ${this.contractAddress}`);
+              console.log(`Контракт: ${this.contractAddress}`);
       console.log(`🔗 QuickNode URL: ${this.quicknodeUrl.substring(0, 50)}...`);
       console.log(`⏰ Интервал мониторинга: ${this.monitoringInterval / 1000} секунд`);
       
@@ -96,9 +96,9 @@ class PriceMonitor {
       const priceDifference = Math.abs(marketPrice - contractInfo.currentPrice);
       const priceDifferencePercent = (priceDifference / marketPrice) * 100;
       
-      console.log(`📊 Рыночная цена: $${marketPrice}`);
-      console.log(`📊 Цена в контракте: $${contractInfo.currentPrice}`);
-      console.log(`📊 Разница: ${priceDifferencePercent.toFixed(2)}%`);
+              console.log(`Рыночная цена: $${marketPrice}`);
+        console.log(`Цена в контракте: $${contractInfo.currentPrice}`);
+        console.log(`Разница: ${priceDifferencePercent.toFixed(2)}%`);
       
       // Проверяем валидность цены в контракте
       if (!contractInfo.isValid) {
@@ -109,7 +109,7 @@ class PriceMonitor {
       
       // Проверяем значительное расхождение цен
       if (priceDifferencePercent > this.alertThreshold) {
-        console.log(`🚨 Значительное расхождение цен: ${priceDifferencePercent.toFixed(2)}%`);
+        console.log(`Значительное расхождение цен: ${priceDifferencePercent.toFixed(2)}%`);
         await this.sendAlert(`Значительное расхождение цен: ${priceDifferencePercent.toFixed(2)}%`);
       }
       
@@ -141,7 +141,7 @@ class PriceMonitor {
   async sendAlert(message) {
     try {
       // Здесь можно добавить отправку уведомлений (email, Slack, Telegram и т.д.)
-      console.log(`🚨 АЛЕРТ: ${message}`);
+              console.log(`АЛЕРТ: ${message}`);
       
       // Пример отправки в лог файл
       const timestamp = new Date().toISOString();

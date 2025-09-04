@@ -362,7 +362,7 @@ export default function TestPage() {
       }
       
       if (tokenCode !== '0x' && investmentCode !== '0x') {
-        result += '\n🎉 Both contracts exist! You can now validate them.';
+        result += '\nBoth contracts exist! You can now validate them.';
         setSuccess(result);
       } else {
         setError(result);
@@ -540,7 +540,7 @@ export default function TestPage() {
                           <strong>Signer 3:</strong> {contractStats.signer3}
                         </div>
                         <div className="stat-item" style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '10px', background: '#e8f5e8', borderRadius: '8px', border: '2px solid #4caf50' }}>
-                          <strong>🔐 Multi-Signature System: 2 out of 3 approval required</strong>
+                          <strong>Multi-Signature System: 2 out of 3 approval required</strong>
                         </div>
                       </>
                     )}

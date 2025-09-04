@@ -1,41 +1,49 @@
 import Database from '../../utils/database';
 import { withAuth, withRateLimit } from '../../src/middleware/auth';
+import { withFullSecurity } from '../../src/middleware/security';
 
 let db = null;
 
-// Apply rate limiting and authentication middleware
-const handler = withRateLimit({ maxRequests: 50, windowMs: 15 * 60 * 1000 })(
-  withAuth(async (req, res) => {
-    // Initialize database connection
-    if (!db) {
-      db = new Database();
-      await db.init();
-    }
-
-    try {
-      switch (req.method) {
-        case 'GET':
-          await handleGet(req, res);
-          break;
-        case 'POST':
-          await handlePost(req, res);
-          break;
-        case 'PUT':
-          await handlePut(req, res);
-          break;
-        case 'DELETE':
-          await handleDelete(req, res);
-          break;
-        default:
-          res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE']);
-          res.status(405).end(`Method ${req.method} Not Allowed`);
+// Apply comprehensive security, rate limiting and authentication middleware
+const handler = withFullSecurity(
+  withRateLimit({ maxRequests: 50, windowMs: 15 * 60 * 1000 })(
+    withAuth(async (req, res) => {
+      // Initialize database connection
+      if (!db) {
+        db = new Database();
+        await db.init();
       }
-    } catch (error) {
-      console.error('API Error:', error);
-      await db.log('error', 'API Error', { error: error.message, stack: error.stack });
-      res.status(500).json({ error: 'Internal Server Error', details: error.message });
-    }
-  })
+
+      try {
+        switch (req.method) {
+          case 'GET':
+            await handleGet(req, res);
+            break;
+          case 'POST':
+            await handlePost(req, res);
+            break;
+          case 'PUT':
+            await handlePut(req, res);
+            break;
+          case 'DELETE':
+            await handleDelete(req, res);
+            break;
+          default:
+            res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE']);
+            res.status(405).end(`Method ${req.method} Not Allowed`);
+        }
+      } catch (error) {
+        console.error('API Error:', error);
+        await db.log('error', 'API Error', { error: error.message, stack: error.stack });
+        res.status(500).json({ error: 'Internal Server Error', details: error.message });
+      }
+    })
+  ),
+  {
+    maxRequestSize: '5mb', // Larger size for contract ABI/bytecode
+    enableCORS: true,
+    enableInputValidation: true
+  }
 );
 
 export default handler;

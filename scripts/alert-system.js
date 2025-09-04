@@ -12,7 +12,7 @@ class AlertSystem {
     }
 
     async initialize() {
-        console.log("🚨 Инициализация системы алертов...");
+        console.log("Инициализация системы алертов...");
         
         // Загружаем адреса контрактов
         const contractsPath = path.join(__dirname, "..", "deployed-contracts-v2.json");
@@ -142,7 +142,7 @@ class AlertSystem {
                 type: 'console',
                 enabled: true,
                 send: (alert) => {
-                    console.log(`🚨 ALERT [${alert.severity}]: ${alert.rule.name}`);
+                    console.log(`ALERT [${alert.severity}]: ${alert.rule.name}`);
                     console.log(`   Description: ${alert.rule.description}`);
                     console.log(`   Activity: ${JSON.stringify(alert.activity, null, 2)}`);
                     console.log(`   Time: ${alert.timestamp}`);
@@ -233,7 +233,7 @@ class AlertSystem {
             action: rule.action
         };
         
-        console.log(`🚨 Сработал алерт: ${rule.name}`);
+                    console.log(`Сработал алерт: ${rule.name}`);
         
         // Отправляем уведомления
         await this.sendNotifications(alert);
@@ -260,7 +260,7 @@ class AlertSystem {
     async executeAction(alert) {
         switch (alert.action) {
             case 'IMMEDIATE_NOTIFICATION':
-                console.log("⚡ Выполняется немедленное уведомление");
+                console.log("Выполняется немедленное уведомление");
                 break;
                 
             case 'SCHEDULED_NOTIFICATION':
@@ -268,7 +268,7 @@ class AlertSystem {
                 break;
                 
             case 'EMERGENCY_ACTION':
-                console.log("🚨 ВЫПОЛНЯЕТСЯ ЭКСТРЕННОЕ ДЕЙСТВИЕ!");
+                console.log("ВЫПОЛНЯЕТСЯ ЭКСТРЕННОЕ ДЕЙСТВИЕ!");
                 await this.executeEmergencyAction(alert);
                 break;
                 
@@ -278,7 +278,7 @@ class AlertSystem {
     }
 
     async executeEmergencyAction(alert) {
-        console.log("🚨 ЭКСТРЕННОЕ ДЕЙСТВИЕ:");
+                    console.log("ЭКСТРЕННОЕ ДЕЙСТВИЕ:");
         
         if (alert.rule.id === 'BLACKLIST_VIOLATION') {
             console.log("   - Блокировка адреса в черном списке");
@@ -307,7 +307,7 @@ class AlertSystem {
     }
 
     async generateAlertReport() {
-        console.log("\n📊 ОТЧЕТ ПО АЛЕРТАМ");
+        console.log("\nОТЧЕТ ПО АЛЕРТАМ");
         console.log("=".repeat(50));
         
         const alertsPath = path.join(__dirname, "..", "security-alerts.json");
