@@ -2,22 +2,23 @@
   "metadata": {
     "title": "DEFIMON Comprehensive Security Audit Report",
     "version": "1.0",
-    "date": "2025-09-04T04:31:00.930Z",
+    "date": "2025-09-04T05:05:01.700Z",
     "auditor": "AI Security Assistant",
     "methodology": "OWASP Top 10, Smart Contract Security Best Practices"
   },
   "executiveSummary": {
     "project": "DEFIMON Smart Contract & Frontend Application",
-    "assessmentDate": "2025-09-04T04:30:55.718Z",
-    "overallRiskScore": "5.3",
-    "overallRiskLevel": "MEDIUM",
-    "totalVulnerabilities": 9,
+    "assessmentDate": "2025-09-04T05:04:54.407Z",
+    "overallRiskScore": "6.4",
+    "overallRiskLevel": "HIGH",
+    "totalVulnerabilities": 6,
     "criticalVulnerabilities": 2,
-    "highVulnerabilities": 0,
-    "mediumVulnerabilities": 7,
+    "highVulnerabilities": 1,
+    "mediumVulnerabilities": 3,
     "lowVulnerabilities": 0,
     "recommendations": [
-      "Immediate remediation of all CRITICAL vulnerabilities required"
+      "Immediate remediation of all CRITICAL vulnerabilities required",
+      "High priority remediation of HIGH severity vulnerabilities"
     ]
   },
   "detailedFindings": {
@@ -32,34 +33,10 @@
           "cvss": 9.8
         }
       ],
-      "timestamp": "2025-09-04T04:30:56.425Z"
+      "timestamp": "2025-09-04T05:04:54.984Z"
     },
     "frontend": {
       "vulnerabilities": [
-        {
-          "severity": "MEDIUM",
-          "title": "Missing Security Header: X-Frame-Options",
-          "description": "Security header X-Frame-Options is not set",
-          "impact": "Reduced protection against clickjacking protection",
-          "cve": "CVE-2024-DEFIMON-101",
-          "cvss": 4
-        },
-        {
-          "severity": "MEDIUM",
-          "title": "Missing Security Header: X-Content-Type-Options",
-          "description": "Security header X-Content-Type-Options is not set",
-          "impact": "Reduced protection against mime type sniffing protection",
-          "cve": "CVE-2024-DEFIMON-101",
-          "cvss": 4
-        },
-        {
-          "severity": "MEDIUM",
-          "title": "Missing Security Header: X-XSS-Protection",
-          "description": "Security header X-XSS-Protection is not set",
-          "impact": "Reduced protection against xss protection",
-          "cve": "CVE-2024-DEFIMON-101",
-          "cvss": 4
-        },
         {
           "severity": "MEDIUM",
           "title": "Missing Security Header: Strict-Transport-Security",
@@ -93,34 +70,38 @@
           "cvss": 9
         },
         {
-          "severity": "MEDIUM",
-          "title": "API Endpoint Information Disclosure",
-          "description": "API endpoint /api/transactions accessible without authentication",
-          "impact": "Potential exposure of sensitive business logic or data",
-          "cve": "CVE-2024-DEFIMON-108",
-          "cvss": 5
+          "severity": "HIGH",
+          "title": "Sensitive Data Exposure",
+          "description": "Potential sensitive information found in HTML source",
+          "impact": "Exposure of API keys, secrets, or other sensitive data",
+          "cve": "CVE-2024-DEFIMON-106",
+          "cvss": 7.5
         }
       ],
-      "timestamp": "2025-09-04T04:31:00.091Z"
+      "timestamp": "2025-09-04T05:05:00.998Z"
     },
     "dependencies": {
       "error": "Command failed: npm audit --json",
-      "timestamp": "2025-09-04T04:31:00.925Z"
+      "timestamp": "2025-09-04T05:05:01.696Z"
     },
     "network": {
       "ports": [],
       "ssl": {},
       "headers": {
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-xss-protection": "1; mode=block",
+        "cache-control": "no-store, must-revalidate",
         "x-powered-by": "Next.js",
-        "etag": "\"5tf0husqxz9ea\"",
+        "etag": "\"ok041rr3et2gd\"",
         "content-type": "text/html; charset=utf-8",
         "vary": "Accept-Encoding",
-        "date": "Thu, 04 Sep 2025 04:31:00 GMT",
+        "date": "Thu, 04 Sep 2025 05:05:01 GMT",
         "connection": "keep-alive",
         "keep-alive": "timeout=5",
         "transfer-encoding": "chunked"
       },
-      "timestamp": "2025-09-04T04:31:00.926Z",
+      "timestamp": "2025-09-04T05:05:01.696Z",
       "status": 200
     }
   },
