@@ -103,7 +103,7 @@ class OracleManager {
 
   async showStatus() {
     try {
-      console.log("\n📊 === СТАТУС ORACLE MANAGER ===");
+              console.log("\n=== СТАТУС ORACLE MANAGER ===");
       
       if (this.oracle) {
         const oracleStatus = this.oracle.getStatus();
@@ -114,8 +114,8 @@ class OracleManager {
       
       if (this.monitor) {
         const monitorStatus = this.monitor.getStatus();
-        console.log(`👁️ Мониторинг: ${monitorStatus.isRunning ? '🟢 Работает' : '🔴 Остановлен'}`);
-        console.log(`📊 История цен: ${monitorStatus.historySize} записей`);
+                  console.log(`Мониторинг: ${monitorStatus.isRunning ? 'Работает' : 'Остановлен'}`);
+                  console.log(`История цен: ${monitorStatus.historySize} записей`);
       }
       
       // Получаем информацию из контракта

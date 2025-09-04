@@ -48,9 +48,9 @@ const notificationConfig = {
   // Шаблоны уведомлений
   templates: {
     critical: {
-      subject: '🚨 CRITICAL ALERT - DEFIMON V2 Security Incident',
+      subject: 'CRITICAL ALERT - DEFIMON V2 Security Incident',
       body: `
-🚨 КРИТИЧЕСКИЙ АЛЕРТ DEFIMON V2
+КРИТИЧЕСКИЙ АЛЕРТ DEFIMON V2
 
 Уровень угрозы: КРИТИЧЕСКИЙ
 Время: {timestamp}
@@ -77,9 +77,9 @@ DEFIMON V2 Security System
     },
     
     high: {
-      subject: '⚠️ HIGH PRIORITY ALERT - DEFIMON V2',
+      subject: 'HIGH PRIORITY ALERT - DEFIMON V2',
       body: `
-⚠️ ВЫСОКИЙ ПРИОРИТЕТ DEFIMON V2
+ВЫСОКИЙ ПРИОРИТЕТ DEFIMON V2
 
 Уровень угрозы: ВЫСОКИЙ
 Время: {timestamp}
@@ -105,9 +105,9 @@ DEFIMON V2 Security System
     },
     
     medium: {
-      subject: '📊 MEDIUM PRIORITY ALERT - DEFIMON V2',
+      subject: 'MEDIUM PRIORITY ALERT - DEFIMON V2',
       body: `
-📊 СРЕДНИЙ ПРИОРИТЕТ DEFIMON V2
+СРЕДНИЙ ПРИОРИТЕТ DEFIMON V2
 
 Уровень угрозы: СРЕДНИЙ
 Время: {timestamp}

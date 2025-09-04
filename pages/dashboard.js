@@ -87,7 +87,7 @@ export default function Dashboard() {
         </Head>
 
         <div className="header">
-          <h1>🔒 Secure Database Dashboard</h1>
+          <h1>Secure Database Dashboard</h1>
           <p>View and manage smart contract data, transactions, and statistics</p>
           <div style={{ marginTop: '20px' }}>
             <Link href="/" className="btn btn-secondary" style={{ marginRight: '10px' }}>
@@ -102,11 +102,11 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* 🔒 SECURITY: Always show wallet status for authenticated users */}
+        {/* SECURITY: Always show wallet status for authenticated users */}
         <div style={{ marginBottom: '20px' }}>
           <WalletStatus />
           <div className="security-notice">
-            <strong>🔒 Authenticated as:</strong> {formatAddress(account)}
+            <strong>Authenticated as:</strong> {formatAddress(account)}
           </div>
         </div>
 

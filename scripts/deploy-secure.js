@@ -1,5 +1,5 @@
 /**
- * 🔒 Secure Contract Deployment Script
+ * Secure Contract Deployment Script
  * Deploys the updated DefimonInvestment contract with all security fixes
  * 
  * SECURITY: This script deploys the contract with reentrancy protection
@@ -9,23 +9,23 @@
 const { ethers } = require("hardhat");
 
 async function main() {
-  console.log("🔒 Starting secure contract deployment...");
-  console.log("⚠️  CRITICAL: Deploying with security fixes for CVSS 9.8/10 vulnerabilities");
+  console.log("Starting secure contract deployment...");
+  console.log("CRITICAL: Deploying with security fixes for CVSS 9.8/10 vulnerabilities");
 
   // Get deployer account
   const [deployer] = await ethers.getSigners();
-  console.log("📝 Deploying contracts with account:", deployer.address);
-  console.log("💰 Account balance:", (await deployer.getBalance()).toString());
+  console.log("Deploying contracts with account:", deployer.address);
+  console.log("Account balance:", (await deployer.getBalance()).toString());
 
   // Deploy DefimonToken first
-  console.log("\n🚀 Deploying DefimonToken...");
+  console.log("\nDeploying DefimonToken...");
   const DefimonToken = await ethers.getContractFactory("DefimonToken");
   const defimonToken = await DefimonToken.deploy();
   await defimonToken.deployed();
-  console.log("✅ DefimonToken deployed to:", defimonToken.address);
+  console.log("DefimonToken deployed to:", defimonToken.address);
 
   // Deploy DefimonInvestment with security fixes
-  console.log("\n🚀 Deploying DefimonInvestment (SECURE VERSION)...");
+  console.log("\nDeploying DefimonInvestment (SECURE VERSION)...");
   const DefimonInvestment = await ethers.getContractFactory("DefimonInvestment");
   
   // Set up signers for multi-signature (use deployer and two other addresses)
@@ -33,7 +33,7 @@ async function main() {
   const signer2 = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"; // Hardhat account 1
   const signer3 = "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC"; // Hardhat account 2
   
-  console.log("🔐 Setting up multi-signature with signers:");
+  console.log("Setting up multi-signature with signers:");
   console.log("   Signer 1:", signer1);
   console.log("   Signer 2:", signer2);
   console.log("   Signer 3:", signer3);
@@ -45,10 +45,10 @@ async function main() {
     signer3
   );
   await defimonInvestment.deployed();
-  console.log("✅ DefimonInvestment (SECURE) deployed to:", defimonInvestment.address);
+  console.log("DefimonInvestment (SECURE) deployed to:", defimonInvestment.address);
 
   // Verify deployment
-  console.log("\n🔍 Verifying deployment...");
+  console.log("\nVerifying deployment...");
   
   // Check contract addresses
   const tokenAddress = await defimonInvestment.defimonToken();
@@ -62,7 +62,7 @@ async function main() {
   console.log("   Signer 3:", signer3Address);
 
   // Verify security features
-  console.log("\n🛡️ Verifying security features...");
+  console.log("\nVerifying security features...");
   
   const isPaused = await defimonInvestment.paused();
   const emergencyMode = await defimonInvestment.emergencyMode();
@@ -73,7 +73,7 @@ async function main() {
   console.log("   Emergency controller:", emergencyController);
 
   // Transfer tokens to investment contract
-  console.log("\n💰 Setting up token distribution...");
+  console.log("\nSetting up token distribution...");
   const totalSupply = await defimonToken.totalSupply();
   const transferAmount = totalSupply.div(2); // Transfer 50% of supply
   
@@ -82,20 +82,20 @@ async function main() {
   
   const transferTx = await defimonToken.transfer(defimonInvestment.address, transferAmount);
   await transferTx.wait();
-  console.log("✅ Tokens transferred to investment contract");
+  console.log("Tokens transferred to investment contract");
 
   // Verify token balance
   const contractBalance = await defimonToken.balanceOf(defimonInvestment.address);
   console.log("   Investment contract token balance:", ethers.utils.formatEther(contractBalance));
 
   // Test emergency controls
-  console.log("\n🚨 Testing emergency controls...");
+  console.log("\nTesting emergency controls...");
   
   try {
     // Test emergency pause (should work for emergency controller)
     const pauseTx = await defimonInvestment.emergencyPause();
     await pauseTx.wait();
-    console.log("✅ Emergency pause successful");
+    console.log("Emergency pause successful");
     
     // Check if contract is paused
     const isPausedAfter = await defimonInvestment.paused();
@@ -104,13 +104,13 @@ async function main() {
     // Test emergency resume
     const resumeTx = await defimonInvestment.emergencyResume();
     await resumeTx.wait();
-    console.log("✅ Emergency resume successful");
+    console.log("Emergency resume successful");
     
     const isPausedAfterResume = await defimonInvestment.paused();
     console.log("   Contract paused after emergency resume:", isPausedAfterResume);
     
   } catch (error) {
-    console.log("⚠️  Emergency control test failed (this is expected for non-controller accounts):", error.message);
+    console.log("Emergency control test failed (this is expected for non-controller accounts):", error.message);
   }
 
   // Save deployment info
@@ -157,30 +157,30 @@ async function main() {
     'deployed-contracts-secure.json',
     JSON.stringify(deploymentInfo, null, 2)
   );
-  console.log("\n💾 Deployment info saved to deployed-contracts-secure.json");
+  console.log("\nDeployment info saved to deployed-contracts-secure.json");
 
   // Final verification
-  console.log("\n🎯 DEPLOYMENT COMPLETE - SECURITY VERIFICATION");
-  console.log("✅ Reentrancy vulnerability (CVSS 9.8/10) - FIXED");
-  console.log("✅ Authentication bypass (CVSS 9.0/10) - FIXED");
-  console.log("✅ Emergency controls implemented");
-  console.log("✅ Rate limiting active");
-  console.log("✅ Investment limits enforced");
-  console.log("✅ Multi-signature withdrawal system active");
+  console.log("\nDEPLOYMENT COMPLETE - SECURITY VERIFICATION");
+  console.log("Reentrancy vulnerability (CVSS 9.8/10) - FIXED");
+  console.log("Authentication bypass (CVSS 9.0/10) - FIXED");
+  console.log("Emergency controls implemented");
+  console.log("Rate limiting active");
+  console.log("Investment limits enforced");
+  console.log("Multi-signature withdrawal system active");
 
-  console.log("\n🚨 IMMEDIATE ACTIONS REQUIRED:");
+  console.log("\nIMMEDIATE ACTIONS REQUIRED:");
   console.log("1. Verify contract addresses on blockchain explorer");
   console.log("2. Test all security features");
   console.log("3. Update frontend configuration");
   console.log("4. Monitor for suspicious activity");
   console.log("5. Schedule security audit");
 
-  console.log("\n🔒 CONTRACT IS NOW SECURE AND READY FOR PRODUCTION");
+  console.log("\nCONTRACT IS NOW SECURE AND READY FOR PRODUCTION");
 }
 
 main()
   .then(() => process.exit(0))
   .catch((error) => {
-    console.error("❌ Deployment failed:", error);
+    console.error("Deployment failed:", error);
     process.exit(1);
   });

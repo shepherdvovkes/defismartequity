@@ -18,7 +18,7 @@ async function main() {
         process.exit(1);
     }
     
-    console.log("🚨 ЭКСТРЕННОЕ ДОБАВЛЕНИЕ В ЧЕРНЫЙ СПИСОК DEFIMON V2");
+    console.log("ЭКСТРЕННОЕ ДОБАВЛЕНИЕ В ЧЕРНЫЙ СПИСОК DEFIMON V2");
     console.log("=".repeat(60));
     console.log("Target address:", targetAddress);
     
@@ -119,7 +119,7 @@ async function main() {
     console.log("\n🔄 Для снятия блокировки используйте:");
     console.log(`npx hardhat run scripts/emergency-unblacklist.js --network sepolia -- ${targetAddress}`);
     
-    console.log("\n📊 Для проверки статуса используйте:");
+            console.log("\nДля проверки статуса используйте:");
     console.log(`npx hardhat run scripts/check-blacklist-status.js --network sepolia -- ${targetAddress}`);
 }
 

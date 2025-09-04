@@ -71,7 +71,7 @@ async function main() {
     }
     
     // Проверяем лимиты инвестиций
-    console.log("\n📊 ЛИМИТЫ ИНВЕСТИЦИЙ:");
+            console.log("\nЛИМИТЫ ИНВЕСТИЦИЙ:");
     const limits = await investment.getInvestmentLimits();
     console.log("Min investment (USD):", limits.minInvestmentUsd.toString());
     console.log("Max investment (USD):", limits.maxInvestmentUsd.toString());

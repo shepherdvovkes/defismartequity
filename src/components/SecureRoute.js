@@ -181,7 +181,13 @@ export default function SecureRoute({ children, redirectTo = '/', requireConnect
   if (requireAuth && isConnected && !isAuthorized) {
     return (
       <div className="auth-required">
-        <div className="security-icon">🔐</div>
+        <div className="security-icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+            <circle cx="12" cy="16" r="1"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </div>
         <h1>Authentication Required</h1>
         <p>Please sign the authentication message to access this page.</p>
         <button 

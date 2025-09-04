@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 async function main() {
-    console.log("📊 ПРОВЕРКА ЛИМИТОВ ИНВЕСТИЦИЙ DEFIMON V2");
+    console.log("ПРОВЕРКА ЛИМИТОВ ИНВЕСТИЦИЙ DEFIMON V2");
     console.log("=".repeat(60));
     
     // Получаем аргументы командной строки
@@ -32,14 +32,14 @@ async function main() {
     // Получаем лимиты инвестиций
     const limits = await investment.getInvestmentLimits();
     
-    console.log("\n📊 ЛИМИТЫ ИНВЕСТИЦИЙ:");
+    console.log("\nЛИМИТЫ ИНВЕСТИЦИЙ:");
     console.log("Min investment (USD):", limits.minInvestmentUsd.toString());
     console.log("Max investment (USD):", limits.maxInvestmentUsd.toString());
     console.log("Large investment threshold (USD):", limits.largeInvestmentUsd.toString());
     console.log("Current ETH/USD price:", limits.currentEthUsdPrice.toString(), "cents");
     console.log("Current ETH/USD price:", (limits.currentEthUsdPrice / 100).toFixed(2), "USD");
     
-    console.log("\n📊 ЛИМИТЫ В ETH:");
+    console.log("\nЛИМИТЫ В ETH:");
     console.log("Min investment (ETH):", ethers.utils.formatEther(limits.minInvestmentEth));
     console.log("Max investment (ETH):", ethers.utils.formatEther(limits.maxInvestmentEth));
     
@@ -122,7 +122,7 @@ async function main() {
     
     // Получаем статистику контракта
     const stats = await investment.getContractStats();
-    console.log("\n📊 СТАТИСТИКА КОНТРАКТА:");
+    console.log("\nСТАТИСТИКА КОНТРАКТА:");
     console.log("Total investors:", stats.totalInvestors.toString());
     console.log("Contract balance:", ethers.utils.formatEther(stats.contractBalance), "ETH");
     console.log("Token balance:", ethers.utils.formatEther(stats.tokenBalance), "DEFI");

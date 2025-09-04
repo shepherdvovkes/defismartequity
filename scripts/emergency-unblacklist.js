@@ -111,7 +111,7 @@ async function main() {
     // Проверяем финальный статус
     const finalTokenStatus = await token.blacklisted(targetAddress);
     const finalInvestmentStatus = await investment.blacklisted(targetAddress);
-    console.log("\n📊 Финальный статус:");
+            console.log("\nФинальный статус:");
     console.log("Token blacklist status:", finalTokenStatus);
     console.log("Investment blacklist status:", finalInvestmentStatus);
     
@@ -165,7 +165,7 @@ async function main() {
     console.log("3. Убедитесь, что причина блокировки устранена");
     console.log("4. Обновите документацию по безопасности");
     
-    console.log("\n📊 Для проверки статуса используйте:");
+            console.log("\nДля проверки статуса используйте:");
     console.log(`npx hardhat run scripts/check-blacklist-status.js --network sepolia -- ${targetAddress}`);
     
     console.log("\n🔍 Для мониторинга активности используйте:");
